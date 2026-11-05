@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,8 +11,27 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "PizDa Строй — строительство домов и ремонт квартир в СПб",
-  description: "Строительство загородных домов и ремонт квартир в Санкт-Петербурге и Ленинградской области. Гарантия, фиксированная цена, собственная бригада.",
+  title: {
+    default: "PizDa Строй — строительство домов и ремонт квартир в СПб и ЛО",
+    template: "%s | PizDa Строй",
+  },
+  description:
+    "Строительство загородных домов под ключ и ремонт квартир в Санкт-Петербурге и Ленинградской области. Фиксированная смета, гарантия, свои бригады.",
+  keywords: [
+    "строительство домов СПб",
+    "загородный дом под ключ",
+    "ремонт квартир Санкт-Петербург",
+    "строительная компания ЛО",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: "PizDa Строй",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -20,11 +40,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={`${geistSans.variable} antialiased`}>
+    <html lang="ru" className={`${geistSans.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-[#0A1628] text-[#F5F5F5]">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
