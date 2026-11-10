@@ -34,46 +34,41 @@ const advantages = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#111C2E] to-[#0A1628]" />
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#E85D04] via-transparent to-transparent" />
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24">
+        <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-[#F5E6D3]/60 blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-orange-200/40 blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <p className="text-[#E85D04] font-semibold text-sm uppercase tracking-wider mb-4">
                 Санкт-Петербург и Ленинградская область
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-[1.15] mb-6 text-[#1A1A1A]">
                 Строим дома.{" "}
                 <span className="text-[#E85D04]">Делаем ремонт.</span>
                 <br />
                 Без сюрпризов.
               </h1>
-              <p className="text-lg text-gray-300 mb-8 max-w-xl">
+              <p className="text-lg text-[#6B7280] mb-8 max-w-lg leading-relaxed">
                 Загородные дома под ключ и ремонт квартир. Фиксированная смета,
-                реальные сроки, свои бригады и гарантия. Скажите, что нужно —
-                посчитаем и построим.
+                реальные сроки, свои бригады и гарантия.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/kontakty"
-                  className="bg-[#E85D04] hover:bg-[#F48C06] text-white font-semibold px-8 py-3.5 rounded-lg text-lg"
-                >
+              <div className="flex flex-wrap gap-3">
+                <Link href="/kontakty" className="btn-primary text-base">
                   Рассчитать стоимость
                 </Link>
-                <Link
-                  href="/portfolio"
-                  className="border border-[#1E293B] hover:border-[#E85D04] text-white font-medium px-8 py-3.5 rounded-lg"
-                >
+                <Link href="/portfolio" className="btn-outline text-base">
                   Смотреть объекты
                 </Link>
               </div>
             </div>
 
-            <div className="bg-[#111C2E] border border-[#1E293B] rounded-2xl p-6 lg:p-8 shadow-2xl">
-              <h2 className="text-xl font-semibold mb-1">Быстрая заявка</h2>
-              <p className="text-gray-400 text-sm mb-6">
+            {/* Form card */}
+            <div className="card-soft p-6 lg:p-8">
+              <h2 className="text-xl font-semibold mb-1 text-[#1A1A1A]">Быстрая заявка</h2>
+              <p className="text-[#6B7280] text-sm mb-6">
                 Оставьте телефон — перезвоним и ответим на вопросы
               </p>
               <ContactForm compact />
@@ -82,26 +77,43 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 border-t border-[#1E293B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Что мы делаем</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+      {/* Services */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-[#1A1A1A]">Что мы делаем</h2>
+            <p className="text-[#6B7280] max-w-xl mx-auto">
               Полный цикл: от идеи и проекта до сдачи объекта под ключ
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((s) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {services.map((s, i) => (
               <div
                 key={s.title}
-                className="bg-[#111C2E] border border-[#1E293B] rounded-xl p-6 hover:border-[#E85D04]/50 transition group"
+                className={`p-6 transition group ${
+                  i === 0
+                    ? "card-orange"
+                    : i === 2
+                    ? "card-green"
+                    : "card-soft"
+                }`}
               >
                 <div className="text-3xl mb-4">{s.icon}</div>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-[#E85D04] transition">
+                <h3
+                  className={`text-lg font-semibold mb-2 ${
+                    i === 0 || i === 2 ? "text-white" : "text-[#1A1A1A] group-hover:text-[#E85D04]"
+                  }`}
+                >
                   {s.title}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{s.desc}</p>
+                <p
+                  className={`text-sm leading-relaxed ${
+                    i === 0 || i === 2 ? "text-white/85" : "text-[#6B7280]"
+                  }`}
+                >
+                  {s.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -117,34 +129,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-[#070E1A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Почему мы</h2>
+      {/* Advantages */}
+      <section className="py-16 lg:py-20 bg-white/60">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-[#1A1A1A]">Почему мы</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {advantages.map((a) => (
-              <div key={a.title} className="bg-[#111C2E] border border-[#1E293B] rounded-xl p-6">
+              <div key={a.title} className="card-soft p-6">
                 <h3 className="text-lg font-semibold text-[#E85D04] mb-2">{a.title}</h3>
-                <p className="text-gray-400 text-sm">{a.text}</p>
+                <p className="text-[#6B7280] text-sm">{a.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 border-t border-[#1E293B]">
+      {/* CTA */}
+      <section className="py-16 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Готовы обсудить проект?</h2>
-          <p className="text-gray-400 mb-8">
-            Оставьте заявку — перезвоним, ответим на вопросы и сделаем предварительный расчёт.
-          </p>
-          <Link
-            href="/kontakty"
-            className="inline-block bg-[#E85D04] hover:bg-[#F48C06] text-white font-semibold px-10 py-4 rounded-lg text-lg"
-          >
-            Оставить заявку
-          </Link>
+          <div className="card-soft p-10 lg:p-14">
+            <h2 className="text-3xl font-bold mb-3 text-[#1A1A1A]">Готовы обсудить проект?</h2>
+            <p className="text-[#6B7280] mb-8 max-w-md mx-auto">
+              Оставьте заявку — перезвоним, ответим на вопросы и сделаем предварительный расчёт.
+            </p>
+            <Link href="/kontakty" className="btn-primary text-lg inline-block">
+              Оставить заявку
+            </Link>
+          </div>
         </div>
       </section>
     </>
