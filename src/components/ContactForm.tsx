@@ -80,10 +80,10 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
 
   if (status === "success") {
     return (
-      <div className="bg-[#111C2E] border border-[#E85D04]/30 rounded-xl p-8 text-center">
-        <div className="text-4xl mb-4">✓</div>
-        <h3 className="text-xl font-semibold text-white mb-2">Заявка отправлена!</h3>
-        <p className="text-gray-400">
+      <div className="bg-[#F0FDF4] border border-[#86EFAC] rounded-2xl p-8 text-center">
+        <div className="text-4xl mb-4 text-[#16A34A]">✓</div>
+        <h3 className="text-xl font-semibold text-[#1A1A1A] mb-2">Заявка отправлена!</h3>
+        <p className="text-[#6B7280]">
           Мы свяжемся с вами в ближайшее время. Обычно отвечаем в течение 30 минут в рабочее время.
         </p>
         <button
@@ -95,6 +95,9 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
       </div>
     );
   }
+
+  const inputClass =
+    "w-full bg-white border border-[#E8E4DE] rounded-xl px-4 py-3 text-[#1A1A1A] placeholder-[#9CA3AF] focus:border-[#E85D04] focus:ring-0";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -109,7 +112,7 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
 
       <div className={compact ? "grid grid-cols-1 gap-4" : "grid grid-cols-1 sm:grid-cols-2 gap-5"}>
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1.5">
+          <label htmlFor="name" className="block text-sm font-medium text-[#4B5563] mb-1.5">
             Имя <span className="text-[#E85D04]">*</span>
           </label>
           <input
@@ -120,12 +123,12 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
             minLength={2}
             maxLength={50}
             placeholder="Как к вам обращаться"
-            className="w-full bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-[#E85D04]"
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1.5">
+          <label htmlFor="phone" className="block text-sm font-medium text-[#4B5563] mb-1.5">
             Телефон <span className="text-[#E85D04]">*</span>
           </label>
           <input
@@ -135,7 +138,7 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
             required
             placeholder="+7 (___) ___-__-__"
             pattern="[\\+]?[0-9\\s\\-\\(\\)]{10,18}"
-            className="w-full bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-[#E85D04]"
+            className={inputClass}
           />
         </div>
       </div>
@@ -143,7 +146,7 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
       {!compact && (
         <>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-[#4B5563] mb-1.5">
               Email
             </label>
             <input
@@ -151,19 +154,15 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
               name="email"
               type="email"
               placeholder="email@example.com"
-              className="w-full bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-[#E85D04]"
+              className={inputClass}
             />
           </div>
 
           <div>
-            <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="service" className="block text-sm font-medium text-[#4B5563] mb-1.5">
               Интересующая услуга
             </label>
-            <select
-              id="service"
-              name="service"
-              className="w-full bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white focus:border-[#E85D04]"
-            >
+            <select id="service" name="service" className={inputClass}>
               <option value="">Выберите услугу</option>
               <option value="house">Загородный дом под ключ</option>
               <option value="repair">Ремонт квартиры</option>
@@ -174,7 +173,7 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="message" className="block text-sm font-medium text-[#4B5563] mb-1.5">
               Комментарий
             </label>
             <textarea
@@ -183,14 +182,14 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
               rows={3}
               maxLength={1000}
               placeholder="Кратко опишите задачу или задайте вопрос"
-              className="w-full bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-[#E85D04] resize-none"
+              className={`${inputClass} resize-none`}
             />
           </div>
         </>
       )}
 
       <div>
-        <label htmlFor="captcha" className="block text-sm font-medium text-gray-300 mb-1.5">
+        <label htmlFor="captcha" className="block text-sm font-medium text-[#4B5563] mb-1.5">
           Проверка: сколько будет {captcha.a} + {captcha.b}? <span className="text-[#E85D04]">*</span>
         </label>
         <div className="flex gap-3 items-center">
@@ -202,13 +201,13 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
             value={captchaInput}
             onChange={(e) => setCaptchaInput(e.target.value)}
             placeholder="Ответ"
-            className="w-32 bg-[#0A1628] border border-[#1E293B] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-[#E85D04]"
+            className="w-32 bg-white border border-[#E8E4DE] rounded-xl px-4 py-3 text-[#1A1A1A] placeholder-[#9CA3AF] focus:border-[#E85D04]"
             autoComplete="off"
           />
           <button
             type="button"
             onClick={refreshCaptcha}
-            className="text-sm text-gray-400 hover:text-[#E85D04] px-2"
+            className="text-sm text-[#9CA3AF] hover:text-[#E85D04] px-2"
             title="Обновить пример"
           >
             ↻
@@ -222,9 +221,9 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
           name="consent"
           type="checkbox"
           required
-          className="mt-1 w-4 h-4 rounded border-[#1E293B] bg-[#0A1628] text-[#E85D04] focus:ring-[#E85D04]"
+          className="mt-1 w-4 h-4 rounded border-[#E8E4DE] text-[#E85D04] focus:ring-[#E85D04]"
         />
-        <label htmlFor="consent" className="text-sm text-gray-400 leading-snug">
+        <label htmlFor="consent" className="text-sm text-[#6B7280] leading-snug">
           Я даю согласие на обработку персональных данных в соответствии с{" "}
           <Link href="/politika" target="_blank" className="text-[#E85D04] hover:underline">
             Политикой конфиденциальности
@@ -238,7 +237,7 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
       </div>
 
       {status === "error" && (
-        <div className="bg-red-900/30 border border-red-700 text-red-300 text-sm rounded-lg px-4 py-3">
+        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
           {errorMsg}
         </div>
       )}
@@ -246,12 +245,12 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full bg-[#E85D04] hover:bg-[#F48C06] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-lg transition"
+        className="w-full btn-primary disabled:opacity-60 disabled:cursor-not-allowed py-3.5"
       >
         {status === "loading" ? "Отправляем..." : "Отправить заявку"}
       </button>
 
-      <p className="text-xs text-gray-500 text-center">
+      <p className="text-xs text-[#9CA3AF] text-center">
         Нажимая кнопку, вы подтверждаете, что ознакомлены с документами по обработке персональных
         данных. Данные обрабатываются на серверах в Российской Федерации.
       </p>
